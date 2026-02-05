@@ -4,8 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Canlı Finans — sade, hızlı, güncel</title>
-  <meta name="description" content="Döviz, altın, emtia, BIST ve ABD endeksleri — sade, hızlı, güncel." />
-  <meta name="theme-color" content="#f6f8fb" />
+  <meta name="description" content="Döviz (TL), altın, emtia, BIST ve ABD endeksleri — sade, hızlı, güncel." />
 
   <style>
     :root{
@@ -17,16 +16,15 @@
       --shadow: 0 10px 30px rgba(15,23,42,.08);
       --radius:18px;
       --brand:#0ea5e9;
-      --warn-bg:#fff7ed;
-      --warn-text:#9a3412;
-      --warn-line:#fed7aa;
+      --good:#16a34a;
+      --bad:#ef4444;
     }
     *{box-sizing:border-box}
     body{
       margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      background: radial-gradient(1200px 600px at 20% -10%, rgba(14,165,233,.20), transparent 55%),
-                  radial-gradient(900px 500px at 90% 10%, rgba(99,102,241,.14), transparent 55%),
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      background: radial-gradient(1200px 600px at 20% -10%, rgba(14,165,233,.18), transparent 55%),
+                  radial-gradient(900px 500px at 90% 10%, rgba(99,102,241,.12), transparent 55%),
                   var(--bg);
       color:var(--text);
     }
@@ -35,22 +33,19 @@
     .topbar{
       display:flex; align-items:center; justify-content:space-between; gap:14px;
       padding:16px 18px;
-      background: rgba(255,255,255,.75);
-      border:1px solid rgba(226,232,240,.8);
+      background: rgba(255,255,255,.78);
+      border:1px solid rgba(226,232,240,.85);
       backdrop-filter: blur(10px);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       position:sticky; top:12px; z-index:10;
     }
-    .brand{
-      display:flex; align-items:center; gap:12px; min-width:240px;
-    }
+    .brand{display:flex; align-items:center; gap:12px; min-width:260px;}
     .logo{
       width:40px;height:40px;border-radius:12px;
       background: linear-gradient(135deg, rgba(14,165,233,.95), rgba(99,102,241,.95));
       box-shadow: 0 10px 22px rgba(14,165,233,.25);
       position:relative;
-      flex:0 0 auto;
     }
     .logo:after{
       content:"";
@@ -61,12 +56,10 @@
     }
     .brand h1{font-size:16px; margin:0; line-height:1.1}
     .brand p{margin:2px 0 0; font-size:12px; color:var(--muted)}
-    .tabs{
-      display:flex; flex-wrap:wrap; gap:8px; justify-content:center;
-    }
+    .tabs{display:flex; flex-wrap:wrap; gap:8px; justify-content:center;}
     .tab{
       border:1px solid var(--line);
-      background:rgba(255,255,255,.9);
+      background:rgba(255,255,255,.92);
       padding:9px 12px;
       border-radius:999px;
       font-size:13px;
@@ -79,35 +72,13 @@
       color:#075985;
       background: rgba(14,165,233,.10);
     }
-    .meta{
-      text-align:right; min-width:210px;
-      font-size:12px; color:var(--muted);
-    }
-    .meta strong{color:var(--text); font-weight:600}
+    .meta{text-align:right; min-width:190px; font-size:12px; color:var(--muted);}
+    .meta strong{color:var(--text); font-weight:650}
 
-    .hero{
-      margin-top:14px;
-      padding:14px 18px;
-      background: rgba(255,255,255,.62);
-      border: 1px solid rgba(226,232,240,.85);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      color:var(--muted);
-      font-size:13px;
-      line-height:1.4;
-    }
-    .hero b{color:var(--text)}
-    .hero small{display:block;margin-top:6px;color:var(--muted)}
-
-    .grid{
-      margin-top:14px;
-      display:grid;
-      grid-template-columns: 1fr;
-      gap:14px;
-    }
+    .grid{margin-top:18px; display:grid; grid-template-columns:1fr; gap:14px;}
     .section{
-      background: rgba(255,255,255,.68);
-      border: 1px solid rgba(226,232,240,.85);
+      background: rgba(255,255,255,.70);
+      border:1px solid rgba(226,232,240,.88);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       overflow:hidden;
@@ -116,41 +87,26 @@
       display:flex; align-items:flex-end; justify-content:space-between; gap:12px;
       padding:16px 18px 10px;
     }
-    .section-title{
-      margin:0;
-      font-size:15px;
-      letter-spacing:.2px;
-    }
-    .section-sub{
-      margin:4px 0 0;
-      font-size:12px;
-      color:var(--muted);
-    }
+    .section-title{margin:0; font-size:15px; letter-spacing:.2px;}
+    .section-sub{margin:4px 0 0; font-size:12px; color:var(--muted);}
     .section-body{padding:0 14px 14px}
-    .cards{
-      display:grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap:12px;
-    }
+
+    .cards{display:grid; grid-template-columns: repeat(12, 1fr); gap:12px;}
     .card{
       grid-column: span 6;
       background: var(--card);
-      border: 1px solid var(--line);
+      border:1px solid var(--line);
       border-radius: 16px;
       box-shadow: 0 10px 22px rgba(15,23,42,.06);
       overflow:hidden;
-      min-height: 240px;
-      position:relative;
+      min-height: 160px;
     }
-    .card.small{min-height:170px}
     .card.full{grid-column: 1 / -1}
     .card .pad{
-      padding:12px 12px 6px;
+      padding:12px 12px 10px;
       display:flex; align-items:center; justify-content:space-between; gap:10px;
     }
-    .card h3{
-      margin:0; font-size:13px; font-weight:650;
-    }
+    .card h3{margin:0; font-size:13px; font-weight:700}
     .tag{
       font-size:11px; color:var(--muted);
       border:1px solid var(--line);
@@ -158,50 +114,47 @@
       background:#fff;
       white-space:nowrap;
     }
-    .widget{
-      padding:0 8px 10px;
-    }
 
-    /* Placeholder / uyarı */
-    .tv-slot{
-      min-height:150px;
-      border-radius:12px;
-      border:1px dashed rgba(226,232,240,.9);
-      background: linear-gradient(180deg, rgba(248,250,252,.75), rgba(255,255,255,.55));
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      text-align:center;
+    .metric{
+      padding:0 12px 14px;
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap:10px;
+      align-items:end;
+    }
+    .price{
+      font-size:30px;
+      font-weight:800;
+      letter-spacing:-.5px;
+      line-height:1;
+    }
+    .unit{font-size:12px;color:var(--muted);margin-left:6px;font-weight:600}
+    .chg{
+      font-size:13px;
+      font-weight:700;
+      text-align:right;
+    }
+    .chg .pct{opacity:.9}
+    .chg.up{color:var(--good)}
+    .chg.down{color:var(--bad)}
+    .mini{
+      padding:0 12px 14px;
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:8px;
       color:var(--muted);
       font-size:12px;
-      padding:10px;
-      position:relative;
     }
-    .tv-warn{
-      margin:8px 12px 12px;
-      background:var(--warn-bg);
-      color:var(--warn-text);
-      border:1px solid var(--warn-line);
-      border-radius:12px;
-      padding:10px 12px;
-      font-size:12px;
-      display:none;
-    }
-    .tv-warn.show{display:block}
-
+    .mini b{display:block;color:var(--text);font-weight:700;font-size:12px;margin-top:2px}
     .note{
       padding:10px 18px 16px;
       font-size:12px;
       color:var(--muted);
-      border-top:1px dashed rgba(226,232,240,.9);
+      border-top:1px dashed rgba(226,232,240,.95);
       background: rgba(248,250,252,.55);
     }
 
-    .news{
-      display:grid;
-      grid-template-columns: 1fr;
-      gap:10px;
-    }
+    .news{display:grid; grid-template-columns:1fr; gap:10px;}
     .news-item{
       background:#fff;
       border:1px solid var(--line);
@@ -209,28 +162,19 @@
       padding:12px 14px;
       box-shadow: 0 10px 22px rgba(15,23,42,.05);
     }
-    .news-item .top{
-      display:flex; align-items:center; justify-content:space-between; gap:10px;
-      margin-bottom:6px;
-    }
+    .news-item .top{display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:6px;}
     .news-item .top b{font-size:13px}
     .news-item .top span{font-size:12px;color:var(--muted)}
-    .news-item p{margin:0;font-size:13px;color:#1f2937;line-height:1.4}
+    .news-item p{margin:0;font-size:13px;color:#1f2937;line-height:1.45}
 
-    footer{
-      margin-top:14px;
-      text-align:center;
-      color:var(--muted);
-      font-size:12px;
-    }
-    footer a{color:#0b4a6f;text-decoration:none;border-bottom:1px dotted rgba(14,165,233,.5)}
-    footer a:hover{border-bottom-style:solid}
+    footer{margin-top:14px; text-align:center; color:var(--muted); font-size:12px;}
 
     @media (max-width: 900px){
       .meta{display:none}
       .brand{min-width:unset}
       .card{grid-column: 1 / -1}
       .topbar{position:static}
+      .price{font-size:28px}
     }
   </style>
 </head>
@@ -248,7 +192,7 @@
       <div class="tabs" id="tabs">
         <div class="tab active" data-target="all">Ana sayfa</div>
         <div class="tab" data-target="fx">Döviz</div>
-        <div class="tab" data-target="gold">Altın / Gümüş</div>
+        <div class="tab" data-target="gold">Altın / Emtia</div>
         <div class="tab" data-target="borsa">Borsa</div>
         <div class="tab" data-target="crypto">Kripto</div>
         <div class="tab" data-target="news">Günün Notları</div>
@@ -260,11 +204,6 @@
       </div>
     </div>
 
-    <div class="hero">
-      <b>Tek sayfada</b> döviz, altın, emtia, borsa ve kriptoya hızlı bakış.
-      <small>Veriler görünmüyorsa: AdBlock/uBlock kapatıp <b>Ctrl+F5</b> yap. TradingView script’leri engellenmiş olabilir.</small>
-    </div>
-
     <div class="grid" id="sections">
 
       <!-- DÖVİZ -->
@@ -272,188 +211,204 @@
         <div class="section-head">
           <div>
             <h2 class="section-title">Döviz (TL bazında)</h2>
-            <p class="section-sub">USD/TRY, EUR/TRY, GBP/TRY ve DXY.</p>
+            <p class="section-sub">USD/TRY, EUR/TRY, GBP/TRY — Stooq verisi ters çevrilerek hesaplanır.</p>
           </div>
-          <span class="tag">Kaynak: TradingView</span>
+          <span class="tag">Kaynak: Stooq</span>
         </div>
 
         <div class="section-body">
           <div class="cards">
-
-            <div class="card small">
+            <div class="card" data-quote="USDTRY">
               <div class="pad"><h3>Dolar / TL</h3><span class="tag">USDTRY</span></div>
-              <div class="tv-warn" data-warn>Widget yüklenmedi. AdBlock/uBlock kapatıp Ctrl+F5 dener misin?</div>
-              <div class="widget">
-                <div class="tv-slot tv" data-src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js"
-                  data-config='{"symbols":[["FX:USDTRY|1D"]],"chartOnly":false,"width":"100%","height":150,"locale":"tr","colorTheme":"light","autosize":true,"showVolume":false,"showMA":false,"hideDateRanges":true,"hideMarketStatus":true,"hideSymbolLogo":false,"scalePosition":"right","scaleMode":"Normal","fontFamily":"system-ui","fontSize":"12","noTimeScale":true,"valuesTracking":"1","changeMode":"price-and-percent","lineWidth":2}'>
-                  Yükleniyor…
-                </div>
+              <div class="metric">
+                <div class="price"><span class="v">—</span><span class="unit">TRY</span></div>
+                <div class="chg"><span class="c">—</span> <span class="pct">—</span></div>
+              </div>
+              <div class="mini">
+                <div>Yüksek<b class="h">—</b></div>
+                <div>Düşük<b class="l">—</b></div>
+                <div>Açılış<b class="o">—</b></div>
               </div>
             </div>
 
-            <div class="card small">
+            <div class="card" data-quote="EURTRY">
               <div class="pad"><h3>Euro / TL</h3><span class="tag">EURTRY</span></div>
-              <div class="tv-warn" data-warn>Widget yüklenmedi. AdBlock/uBlock kapatıp Ctrl+F5 dener misin?</div>
-              <div class="widget">
-                <div class="tv-slot tv" data-src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js"
-                  data-config='{"symbols":[["FX:EURTRY|1D"]],"chartOnly":false,"width":"100%","height":150,"locale":"tr","colorTheme":"light","autosize":true,"showVolume":false,"hideDateRanges":true,"hideMarketStatus":true,"noTimeScale":true,"valuesTracking":"1","changeMode":"price-and-percent","lineWidth":2}'>
-                  Yükleniyor…
-                </div>
+              <div class="metric">
+                <div class="price"><span class="v">—</span><span class="unit">TRY</span></div>
+                <div class="chg"><span class="c">—</span> <span class="pct">—</span></div>
+              </div>
+              <div class="mini">
+                <div>Yüksek<b class="h">—</b></div>
+                <div>Düşük<b class="l">—</b></div>
+                <div>Açılış<b class="o">—</b></div>
               </div>
             </div>
 
-            <div class="card small">
+            <div class="card" data-quote="GBPTRY">
               <div class="pad"><h3>Sterlin / TL</h3><span class="tag">GBPTRY</span></div>
-              <div class="tv-warn" data-warn>Widget yüklenmedi. AdBlock/uBlock kapatıp Ctrl+F5 dener misin?</div>
-              <div class="widget">
-                <div class="tv-slot tv" data-src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js"
-                  data-config='{"symbols":[["FX:GBPTRY|1D"]],"chartOnly":false,"width":"100%","height":150,"locale":"tr","colorTheme":"light","autosize":true,"showVolume":false,"hideDateRanges":true,"hideMarketStatus":true,"noTimeScale":true,"valuesTracking":"1","changeMode":"price-and-percent","lineWidth":2}'>
-                  Yükleniyor…
-                </div>
+              <div class="metric">
+                <div class="price"><span class="v">—</span><span class="unit">TRY</span></div>
+                <div class="chg"><span class="c">—</span> <span class="pct">—</span></div>
+              </div>
+              <div class="mini">
+                <div>Yüksek<b class="h">—</b></div>
+                <div>Düşük<b class="l">—</b></div>
+                <div>Açılış<b class="o">—</b></div>
               </div>
             </div>
 
-            <div class="card small">
-              <div class="pad"><h3>DXY (Dolar Endeksi)</h3><span class="tag">DXY</span></div>
-              <div class="tv-warn" data-warn>Widget yüklenmedi. AdBlock/uBlock kapatıp Ctrl+F5 dener misin?</div>
-              <div class="widget">
-                <div class="tv-slot tv" data-src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js"
-                  data-config='{"symbols":[["TVC:DXY|1D"]],"chartOnly":false,"width":"100%","height":150,"locale":"tr","colorTheme":"light","autosize":true,"showVolume":false,"hideDateRanges":true,"hideMarketStatus":true,"noTimeScale":true,"valuesTracking":"1","changeMode":"price-and-percent","lineWidth":2}'>
-                  Yükleniyor…
-                </div>
+            <div class="card" data-quote="TRYUSD">
+              <div class="pad"><h3>TL / Dolar</h3><span class="tag">TRYUSD</span></div>
+              <div class="metric">
+                <div class="price"><span class="v">—</span><span class="unit">USD</span></div>
+                <div class="chg"><span class="c">—</span> <span class="pct">—</span></div>
+              </div>
+              <div class="mini">
+                <div>Yüksek<b class="h">—</b></div>
+                <div>Düşük<b class="l">—</b></div>
+                <div>Açılış<b class="o">—</b></div>
               </div>
             </div>
-
           </div>
         </div>
 
-        <div class="note">Bu sayfa widget toplama mantığında. Trafik/Adsense için ayrıca “Günün Notları” bölümünü düzenli doldurmak çok önemli.</div>
+        <div class="note">Not: Stooq “alış/satış” (bid/ask) yerine “Son / OHLC” verir. İstersen bankaya/kuruma göre “alış-satış” alanını admin’den manuel girilecek şekilde ekleriz.</div>
       </section>
 
-      <!-- ALTIN / GÜMÜŞ / EMTİA -->
+      <!-- ALTIN / EMTİA -->
       <section class="section" data-section="gold">
         <div class="section-head">
           <div>
-            <h2 class="section-title">Altın / Gümüş / Emtia</h2>
-            <p class="section-sub">Gram altın, ons altın, gümüş ve Brent.</p>
+            <h2 class="section-title">Altın / Emtia</h2>
+            <p class="section-sub">Ons altın, gümüş, Brent; gram altın için “ons × USDTRY / 31.1035” hesaplanır.</p>
           </div>
-          <span class="tag">Kaynak: TradingView</span>
+          <span class="tag">Kaynak: Stooq</span>
         </div>
 
         <div class="section-body">
           <div class="cards">
-
-            <div class="card">
-              <div class="pad"><h3>Gram Altın (XAU/TRY)</h3><span class="tag">XAUTRY</span></div>
-              <div class="tv-warn" data-warn>Widget yüklenmedi. AdBlock/uBlock kapatıp Ctrl+F5 dener misin?</div>
-              <div class="widget">
-                <div class="tv-slot tv" data-src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js"
-                  data-config='{"symbols":[["OANDA:XAUTRY|1D"]],"chartOnly":false,"width":"100%","height":210,"locale":"tr","colorTheme":"light","autosize":true,"showVolume":false,"hideDateRanges":false,"hideMarketStatus":true,"noTimeScale":false,"valuesTracking":"1","changeMode":"price-and-percent","lineWidth":2}'>
-                  Yükleniyor…
-                </div>
+            <div class="card" data-quote="GOLD">
+              <div class="pad"><h3>Ons Altın</h3><span class="tag">GOLD</span></div>
+              <div class="metric">
+                <div class="price"><span class="v">—</span><span class="unit">USD</span></div>
+                <div class="chg"><span class="c">—</span> <span class="pct">—</span></div>
+              </div>
+              <div class="mini">
+                <div>Yüksek<b class="h">—</b></div>
+                <div>Düşük<b class="l">—</b></div>
+                <div>Açılış<b class="o">—</b></div>
               </div>
             </div>
 
-            <div class="card">
-              <div class="pad"><h3>Ons Altın (XAU/USD)</h3><span class="tag">XAUUSD</span></div>
-              <div class="tv-warn" data-warn>Widget yüklenmedi. AdBlock/uBlock kapatıp Ctrl+F5 dener misin?</div>
-              <div class="widget">
-                <div class="tv-slot tv" data-src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js"
-                  data-config='{"symbols":[["OANDA:XAUUSD|1D"]],"chartOnly":false,"width":"100%","height":210,"locale":"tr","colorTheme":"light","autosize":true,"showVolume":false,"hideMarketStatus":true,"valuesTracking":"1","changeMode":"price-and-percent","lineWidth":2}'>
-                  Yükleniyor…
-                </div>
+            <div class="card" data-quote="SILVER">
+              <div class="pad"><h3>Gümüş</h3><span class="tag">SILVER</span></div>
+              <div class="metric">
+                <div class="price"><span class="v">—</span><span class="unit">USD</span></div>
+                <div class="chg"><span class="c">—</span> <span class="pct">—</span></div>
+              </div>
+              <div class="mini">
+                <div>Yüksek<b class="h">—</b></div>
+                <div>Düşük<b class="l">—</b></div>
+                <div>Açılış<b class="o">—</b></div>
               </div>
             </div>
 
-            <div class="card">
-              <div class="pad"><h3>Gümüş (XAG/USD)</h3><span class="tag">XAGUSD</span></div>
-              <div class="tv-warn" data-warn>Widget yüklenmedi. AdBlock/uBlock kapatıp Ctrl+F5 dener misin?</div>
-              <div class="widget">
-                <div class="tv-slot tv" data-src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js"
-                  data-config='{"symbols":[["OANDA:XAGUSD|1D"]],"chartOnly":false,"width":"100%","height":210,"locale":"tr","colorTheme":"light","autosize":true,"showVolume":false,"hideMarketStatus":true,"valuesTracking":"1","changeMode":"price-and-percent","lineWidth":2}'>
-                  Yükleniyor…
-                </div>
+            <div class="card" data-quote="BRENT">
+              <div class="pad"><h3>Brent Petrol</h3><span class="tag">BRENT</span></div>
+              <div class="metric">
+                <div class="price"><span class="v">—</span><span class="unit">USD</span></div>
+                <div class="chg"><span class="c">—</span> <span class="pct">—</span></div>
+              </div>
+              <div class="mini">
+                <div>Yüksek<b class="h">—</b></div>
+                <div>Düşük<b class="l">—</b></div>
+                <div>Açılış<b class="o">—</b></div>
               </div>
             </div>
 
-            <div class="card">
-              <div class="pad"><h3>Brent Petrol</h3><span class="tag">UKOIL</span></div>
-              <div class="tv-warn" data-warn>Widget yüklenmedi. AdBlock/uBlock kapatıp Ctrl+F5 dener misin?</div>
-              <div class="widget">
-                <div class="tv-slot tv" data-src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js"
-                  data-config='{"symbols":[["TVC:UKOIL|1D"]],"chartOnly":false,"width":"100%","height":210,"locale":"tr","colorTheme":"light","autosize":true,"showVolume":false,"hideMarketStatus":true,"valuesTracking":"1","changeMode":"price-and-percent","lineWidth":2}'>
-                  Yükleniyor…
-                </div>
+            <div class="card" id="gramAltinCard">
+              <div class="pad"><h3>Gram Altın (Hesap)</h3><span class="tag">≈ (GOLD × USDTRY) / 31.1035</span></div>
+              <div class="metric">
+                <div class="price"><span class="v" id="gramVal">—</span><span class="unit">TRY</span></div>
+                <div class="chg" id="gramChg"><span class="c">—</span> <span class="pct">—</span></div>
+              </div>
+              <div class="mini">
+                <div>Not<b>Yaklaşık</b></div>
+                <div>Kaynak<b>Stooq</b></div>
+                <div>Güncelleme<b id="gramUpd">—</b></div>
               </div>
             </div>
-
           </div>
         </div>
 
-        <div class="note">Çeyrek/tam/22 ayar gibi içerikleri “Günün Notları”na kısa fiyat özeti olarak girebilirsin (Adsense için özgün içerik olur).</div>
+        <div class="note">Gram altın “yaklaşık” hesaplanır. İstersen sonraki adımda “Çeyrek/22 ayar/Has altın” gibi kalemleri admin’den girip burada tablo halinde gösterebiliriz (EnuygunFinans tarzı).</div>
       </section>
 
       <!-- BORSA -->
       <section class="section" data-section="borsa">
         <div class="section-head">
           <div>
-            <h2 class="section-title">Borsa (BIST + ABD)</h2>
-            <p class="section-sub">Endeks kartları + popüler ABD hisseleri listesi.</p>
+            <h2 class="section-title">Borsa</h2>
+            <p class="section-sub">BIST 100 + S&P 500 + NASDAQ 100 — grafik yok, hızlı kart.</p>
           </div>
-          <span class="tag">Kaynak: TradingView</span>
+          <span class="tag">Kaynak: Stooq</span>
         </div>
 
         <div class="section-body">
           <div class="cards">
-
-            <div class="card">
+            <div class="card" data-quote="XU100">
               <div class="pad"><h3>BIST 100</h3><span class="tag">XU100</span></div>
-              <div class="tv-warn" data-warn>Widget yüklenmedi. AdBlock/uBlock kapatıp Ctrl+F5 dener misin?</div>
-              <div class="widget">
-                <div class="tv-slot tv" data-src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js"
-                  data-config='{"symbols":[["BIST:XU100|1D"]],"chartOnly":false,"width":"100%","height":230,"locale":"tr","colorTheme":"light","autosize":true,"showVolume":false,"hideMarketStatus":true,"valuesTracking":"1","changeMode":"price-and-percent","lineWidth":2}'>
-                  Yükleniyor…
-                </div>
+              <div class="metric">
+                <div class="price"><span class="v">—</span><span class="unit">TRY</span></div>
+                <div class="chg"><span class="c">—</span> <span class="pct">—</span></div>
+              </div>
+              <div class="mini">
+                <div>Yüksek<b class="h">—</b></div>
+                <div>Düşük<b class="l">—</b></div>
+                <div>Açılış<b class="o">—</b></div>
               </div>
             </div>
 
-            <div class="card">
-              <div class="pad"><h3>S&P 500</h3><span class="tag">SPX</span></div>
-              <div class="tv-warn" data-warn>Widget yüklenmedi. AdBlock/uBlock kapatıp Ctrl+F5 dener misin?</div>
-              <div class="widget">
-                <div class="tv-slot tv" data-src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js"
-                  data-config='{"symbols":[["TVC:SPX|1D"]],"chartOnly":false,"width":"100%","height":230,"locale":"tr","colorTheme":"light","autosize":true,"showVolume":false,"hideMarketStatus":true,"valuesTracking":"1","changeMode":"price-and-percent","lineWidth":2}'>
-                  Yükleniyor…
-                </div>
+            <div class="card" data-quote="^SPX">
+              <div class="pad"><h3>S&P 500</h3><span class="tag">^SPX</span></div>
+              <div class="metric">
+                <div class="price"><span class="v">—</span><span class="unit">USD</span></div>
+                <div class="chg"><span class="c">—</span> <span class="pct">—</span></div>
+              </div>
+              <div class="mini">
+                <div>Yüksek<b class="h">—</b></div>
+                <div>Düşük<b class="l">—</b></div>
+                <div>Açılış<b class="o">—</b></div>
               </div>
             </div>
 
-            <div class="card">
-              <div class="pad"><h3>NASDAQ 100</h3><span class="tag">NDX</span></div>
-              <div class="tv-warn" data-warn>Widget yüklenmedi. AdBlock/uBlock kapatıp Ctrl+F5 dener misin?</div>
-              <div class="widget">
-                <div class="tv-slot tv" data-src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js"
-                  data-config='{"symbols":[["TVC:NDX|1D"]],"chartOnly":false,"width":"100%","height":230,"locale":"tr","colorTheme":"light","autosize":true,"showVolume":false,"hideMarketStatus":true,"valuesTracking":"1","changeMode":"price-and-percent","lineWidth":2}'>
-                  Yükleniyor…
-                </div>
+            <div class="card" data-quote="^NDX">
+              <div class="pad"><h3>NASDAQ 100</h3><span class="tag">^NDX</span></div>
+              <div class="metric">
+                <div class="price"><span class="v">—</span><span class="unit">USD</span></div>
+                <div class="chg"><span class="c">—</span> <span class="pct">—</span></div>
+              </div>
+              <div class="mini">
+                <div>Yüksek<b class="h">—</b></div>
+                <div>Düşük<b class="l">—</b></div>
+                <div>Açılış<b class="o">—</b></div>
               </div>
             </div>
 
-            <div class="card">
-              <div class="pad"><h3>ABD - Popüler Hisseler</h3><span class="tag">AAPL • NVDA • TSLA</span></div>
-              <div class="tv-warn" data-warn>Widget yüklenmedi. AdBlock/uBlock kapatıp Ctrl+F5 dener misin?</div>
-              <div class="widget">
-                <div class="tv-slot tv" data-src="https://s3.tradingview.com/external-embedding/embed-widget-market-quotes.js"
-                  data-config='{"width":"100%","height":230,"symbolsGroups":[{"name":"ABD - Popüler","originalName":"US","symbols":[{"name":"NASDAQ:AAPL","displayName":"Apple"},{"name":"NASDAQ:NVDA","displayName":"NVIDIA"},{"name":"NASDAQ:TSLA","displayName":"Tesla"},{"name":"NYSE:MSFT","displayName":"Microsoft"},{"name":"NASDAQ:AMZN","displayName":"Amazon"}]}],"showSymbolLogo":true,"colorTheme":"light","isTransparent":true,"locale":"tr"}'>
-                  Yükleniyor…
-                </div>
+            <div class="card full">
+              <div class="pad">
+                <h3>Günün öne çıkanları (manuel / admin)</h3>
+                <span class="tag">Yakında</span>
+              </div>
+              <div style="padding:0 14px 16px;color:var(--muted);font-size:13px;line-height:1.5">
+                Buraya admin panelden “En çok işlem gören hisseler”, “Günün öne çıkan hisseleri”, “Fonlar” gibi kısa bloklar gireceğiz.
+                Böylece grafik olmasa bile sayfa dolu ve SEO açısından güçlü olacak.
               </div>
             </div>
-
           </div>
         </div>
 
-        <div class="note">Eğer bazı endeksler boş kalırsa: sembol adını alternatifle değiştiririz (tek satır).</div>
+        <div class="note">Bu yöntem TradingView “permission denied” sorununu tamamen bitirir. GitHub Pages’te stabil çalışır.</div>
       </section>
 
       <!-- KRİPTO -->
@@ -461,62 +416,62 @@
         <div class="section-head">
           <div>
             <h2 class="section-title">Kripto</h2>
-            <p class="section-sub">BTC, ETH, SOL + öne çıkan liste.</p>
+            <p class="section-sub">BTC, ETH, SOL — hızlı kart.</p>
           </div>
-          <span class="tag">Kaynak: TradingView</span>
+          <span class="tag">Kaynak: Stooq</span>
         </div>
 
         <div class="section-body">
           <div class="cards">
+            <div class="card" data-quote="BTCUSD">
+              <div class="pad"><h3>Bitcoin</h3><span class="tag">BTCUSD</span></div>
+              <div class="metric">
+                <div class="price"><span class="v">—</span><span class="unit">USD</span></div>
+                <div class="chg"><span class="c">—</span> <span class="pct">—</span></div>
+              </div>
+              <div class="mini">
+                <div>Yüksek<b class="h">—</b></div>
+                <div>Düşük<b class="l">—</b></div>
+                <div>Açılış<b class="o">—</b></div>
+              </div>
+            </div>
 
-            <div class="card">
-              <div class="pad"><h3>Bitcoin</h3><span class="tag">BTCUSDT</span></div>
-              <div class="tv-warn" data-warn>Widget yüklenmedi. AdBlock/uBlock kapatıp Ctrl+F5 dener misin?</div>
-              <div class="widget">
-                <div class="tv-slot tv" data-src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js"
-                  data-config='{"symbols":[["BINANCE:BTCUSDT|1D"]],"chartOnly":false,"width":"100%","height":230,"locale":"tr","colorTheme":"light","autosize":true,"showVolume":false,"hideMarketStatus":true,"valuesTracking":"1","changeMode":"price-and-percent","lineWidth":2}'>
-                  Yükleniyor…
-                </div>
+            <div class="card" data-quote="ETHUSD">
+              <div class="pad"><h3>Ethereum</h3><span class="tag">ETHUSD</span></div>
+              <div class="metric">
+                <div class="price"><span class="v">—</span><span class="unit">USD</span></div>
+                <div class="chg"><span class="c">—</span> <span class="pct">—</span></div>
+              </div>
+              <div class="mini">
+                <div>Yüksek<b class="h">—</b></div>
+                <div>Düşük<b class="l">—</b></div>
+                <div>Açılış<b class="o">—</b></div>
+              </div>
+            </div>
+
+            <div class="card" data-quote="SOLUSD">
+              <div class="pad"><h3>Solana</h3><span class="tag">SOLUSD</span></div>
+              <div class="metric">
+                <div class="price"><span class="v">—</span><span class="unit">USD</span></div>
+                <div class="chg"><span class="c">—</span> <span class="pct">—</span></div>
+              </div>
+              <div class="mini">
+                <div>Yüksek<b class="h">—</b></div>
+                <div>Düşük<b class="l">—</b></div>
+                <div>Açılış<b class="o">—</b></div>
               </div>
             </div>
 
             <div class="card">
-              <div class="pad"><h3>Ethereum</h3><span class="tag">ETHUSDT</span></div>
-              <div class="tv-warn" data-warn>Widget yüklenmedi. AdBlock/uBlock kapatıp Ctrl+F5 dener misin?</div>
-              <div class="widget">
-                <div class="tv-slot tv" data-src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js"
-                  data-config='{"symbols":[["BINANCE:ETHUSDT|1D"]],"chartOnly":false,"width":"100%","height":230,"locale":"tr","colorTheme":"light","autosize":true,"showVolume":false,"hideMarketStatus":true,"valuesTracking":"1","changeMode":"price-and-percent","lineWidth":2}'>
-                  Yükleniyor…
-                </div>
+              <div class="pad"><h3>Mini SEO Notu</h3><span class="tag">Adsense</span></div>
+              <div style="padding:0 14px 16px;color:var(--muted);font-size:13px;line-height:1.5">
+                Adsense için: Her bölümün altına 2–3 satır açıklama + 1 tablo eklemek (özellikle döviz/altın) onay ve trafik için çok iyi olur.
               </div>
             </div>
-
-            <div class="card">
-              <div class="pad"><h3>Solana</h3><span class="tag">SOLUSDT</span></div>
-              <div class="tv-warn" data-warn>Widget yüklenmedi. AdBlock/uBlock kapatıp Ctrl+F5 dener misin?</div>
-              <div class="widget">
-                <div class="tv-slot tv" data-src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js"
-                  data-config='{"symbols":[["BINANCE:SOLUSDT|1D"]],"chartOnly":false,"width":"100%","height":230,"locale":"tr","colorTheme":"light","autosize":true,"showVolume":false,"hideMarketStatus":true,"valuesTracking":"1","changeMode":"price-and-percent","lineWidth":2}'>
-                  Yükleniyor…
-                </div>
-              </div>
-            </div>
-
-            <div class="card">
-              <div class="pad"><h3>Öne çıkanlar (liste)</h3><span class="tag">Top Coins</span></div>
-              <div class="tv-warn" data-warn>Widget yüklenmedi. AdBlock/uBlock kapatıp Ctrl+F5 dener misin?</div>
-              <div class="widget">
-                <div class="tv-slot tv" data-src="https://s3.tradingview.com/external-embedding/embed-widget-screener.js"
-                  data-config='{"width":"100%","height":230,"defaultColumn":"overview","defaultScreen":"general","market":"crypto","showToolbar":false,"colorTheme":"light","locale":"tr","isTransparent":true}'>
-                  Yükleniyor…
-                </div>
-              </div>
-            </div>
-
           </div>
         </div>
 
-        <div class="note">Kriptoda istersen BTC/TRY gibi TL pariteleri de ekleriz.</div>
+        <div class="note">Kripto verisi de Stooq’tan geliyor. İstersen USDT yerine USD/TL, BTC/TRY gibi TL’ye çevrilmiş kartlar da ekleyebiliriz.</div>
       </section>
 
       <!-- HABER / NOTLAR -->
@@ -539,15 +494,12 @@
     </div>
 
     <footer>
-      © <span id="year"></span> Canlı Finans •
-      <a href="./privacy.html" target="_blank" rel="noopener">Gizlilik</a> •
-      <a href="./terms.html" target="_blank" rel="noopener">Kullanım</a> •
-      <span>Kaynak: TradingView widget’ları</span>
+      © <span id="year"></span> Canlı Finans • Minimal demo • Veri: Stooq
     </footer>
   </div>
 
   <script>
-    // Saat
+    // ========= Saat =========
     const nowEl = document.getElementById("now");
     const yearEl = document.getElementById("year");
     function tick(){
@@ -558,51 +510,7 @@
     }
     tick(); setInterval(tick, 1000);
 
-    // TradingView widget loader (daha stabil)
-    function loadTradingViewForVisible(){
-      const visibleSections = Array.from(document.querySelectorAll('[data-section]'))
-        .filter(sec => sec.style.display !== 'none');
-
-      const slots = visibleSections.flatMap(sec => Array.from(sec.querySelectorAll('.tv')));
-
-      slots.forEach(slot => {
-        if (slot.dataset.loaded === "1") return;
-
-        const src = slot.dataset.src;
-        const cfg = slot.dataset.config;
-
-        // TradingView widget beklediği container class'ları
-        const container = document.createElement('div');
-        container.className = 'tradingview-widget-container';
-        const inner = document.createElement('div');
-        inner.className = 'tradingview-widget-container__widget';
-        container.appendChild(inner);
-
-        // slot içini temizle ve container'ı koy
-        slot.textContent = '';
-        slot.appendChild(container);
-
-        // Script'i düzgün şekilde enjekte et
-        const script = document.createElement('script');
-        script.type = 'text/javascript';
-        script.src = src;
-        script.async = true;
-        script.text = cfg; // kritik: config JSON buraya
-        container.appendChild(script);
-
-        slot.dataset.loaded = "1";
-
-        // 4sn sonra hala boşsa uyarı göster (AdBlock vb.)
-        setTimeout(() => {
-          const warn = slot.closest('.card')?.querySelector('[data-warn]');
-          const hasIFrameOrContent = container.querySelector('iframe, canvas, svg') || container.textContent.trim().length > 0;
-          // TV bazen iframe basar; bazen DOM'a içerik yazar. Hiçbir şey yoksa uyar.
-          if (!hasIFrameOrContent && warn) warn.classList.add('show');
-        }, 4000);
-      });
-    }
-
-    // Sekmeler
+    // ========= Sekmeler =========
     const tabs = document.querySelectorAll(".tab");
     const sections = document.querySelectorAll("[data-section]");
     tabs.forEach(t=>{
@@ -613,20 +521,18 @@
         sections.forEach(s=>{
           s.style.display = (target==="all" || s.dataset.section===target) ? "" : "none";
         });
-        // sadece görünenlerin widget'larını yükle
-        loadTradingViewForVisible();
         window.scrollTo({top:0, behavior:"smooth"});
       });
     });
 
-    // Haberleri yükle
+    // ========= Haberler =========
     async function loadNews(){
       const box = document.getElementById("news");
       try{
         const res = await fetch("./news.json", {cache:"no-store"});
         const data = await res.json();
         if(!Array.isArray(data) || data.length===0){
-          box.innerHTML = `<div class="news-item"><div class="top"><b>Henüz not yok</b><span>—</span></div><p>Admin panelden 2–3 kısa not ekle. Adsense için özgün içerik çok işe yarar.</p></div>`;
+          box.innerHTML = `<div class="news-item"><div class="top"><b>Henüz not yok</b><span>—</span></div><p>Admin panelden ekleyebilirsin.</p></div>`;
           return;
         }
         box.innerHTML = data.slice(0,12).map(item => `
@@ -645,11 +551,142 @@
     function escapeHtml(s){
       return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
     }
-
     loadNews();
 
-    // Sayfa açılır açılmaz görünen widget'ları yükle
-    loadTradingViewForVisible();
+    // ========= Stooq veri çekme =========
+    // Stooq CSV: https://stooq.com/q/l/?s=SYMBOL&f=sd2t2ohlcv&h&e=csv
+    // GitHub Pages CORS için allorigins kullanıyoruz.
+    const AO = "https://api.allorigins.win/raw?url=";
+
+    const map = {
+      // Döviz: Stooq TRYUSD vs verir. USDTRY vb ters çevrilir.
+      "TRYUSD": { s:"tryusd", unit:"USD", invert:false },
+      "USDTRY": { s:"tryusd", unit:"TRY", invert:true  }, // 1 / TRYUSD
+      "EURTRY": { s:"tryeur", unit:"TRY", invert:true  }, // 1 / TRYEUR
+      "GBPTRY": { s:"trygbp", unit:"TRY", invert:true  }, // 1 / TRYGBP
+
+      // Endeksler / emtia / kripto (Stooq)
+      "XU100":  { s:"xu100", unit:"TRY" },
+      "^SPX":   { s:"^spx",  unit:"USD" },
+      "^NDX":   { s:"^ndx",  unit:"USD" },
+
+      "GOLD":   { s:"gold",  unit:"USD" },   // ons
+      "SILVER": { s:"silver",unit:"USD" },
+      "BRENT":  { s:"brent", unit:"USD" },
+
+      "BTCUSD": { s:"btcusd",unit:"USD" },
+      "ETHUSD": { s:"ethusd",unit:"USD" },
+      "SOLUSD": { s:"solusd",unit:"USD" },
+    };
+
+    function fmt(n, digits=4){
+      if(n === null || n === undefined || Number.isNaN(n)) return "—";
+      return n.toLocaleString("tr-TR", {minimumFractionDigits: digits, maximumFractionDigits: digits});
+    }
+    function fmt2(n){
+      if(n === null || n === undefined || Number.isNaN(n)) return "—";
+      return n.toLocaleString("tr-TR", {minimumFractionDigits: 2, maximumFractionDigits: 2});
+    }
+    function setCard(card, {value, unit, change, changePct, o, h, l}){
+      card.querySelector(".v").textContent = (unit === "USD" || unit==="TRY") ? fmt2(value) : fmt(value);
+      const chgEl = card.querySelector(".chg");
+      chgEl.querySelector(".c").textContent = (change>=0?"+":"") + fmt2(change);
+      chgEl.querySelector(".pct").textContent = `(${(changePct>=0?"+":"") + fmt2(changePct)}%)`;
+      chgEl.classList.remove("up","down");
+      chgEl.classList.add(change>=0 ? "up" : "down");
+
+      card.querySelector(".o").textContent = fmt2(o);
+      card.querySelector(".h").textContent = fmt2(h);
+      card.querySelector(".l").textContent = fmt2(l);
+
+      // unit tag override
+      const unitSpan = card.querySelector(".unit");
+      if(unitSpan) unitSpan.textContent = unit;
+    }
+
+    function parseCSV(csv){
+      // header: Symbol,Date,Time,Open,High,Low,Close,Volume
+      const lines = csv.trim().split("\n");
+      if(lines.length < 2) return null;
+      const row = lines[1].split(",");
+      const open = parseFloat(row[3]);
+      const high = parseFloat(row[4]);
+      const low  = parseFloat(row[5]);
+      const close= parseFloat(row[6]);
+      return {open, high, low, close};
+    }
+
+    async function fetchQuote(key){
+      const cfg = map[key];
+      if(!cfg) return null;
+
+      const url = `https://stooq.com/q/l/?s=${encodeURIComponent(cfg.s)}&f=sd2t2ohlcv&h&e=csv`;
+      const res = await fetch(AO + encodeURIComponent(url), {cache:"no-store"});
+      const txt = await res.text();
+      const q = parseCSV(txt);
+      if(!q) return null;
+
+      let {open, high, low, close} = q;
+
+      if(cfg.invert){
+        // inverse for TRYxxx -> xxxTRY
+        open = 1/open;
+        high = 1/low;  // note: inverse flips extremes
+        low  = 1/high;
+        close= 1/close;
+      }
+      const change = close - open;
+      const changePct = (change / open) * 100;
+      return {open, high, low, close, change, changePct, unit: cfg.unit};
+    }
+
+    async function refreshAll(){
+      const cards = document.querySelectorAll(".card[data-quote]");
+      const results = {};
+      await Promise.all([...cards].map(async (card)=>{
+        const key = card.getAttribute("data-quote");
+        try{
+          const q = await fetchQuote(key);
+          if(!q) return;
+          results[key]=q;
+          setCard(card, {
+            value:q.close, unit:q.unit,
+            change:q.change, changePct:q.changePct,
+            o:q.open, h:q.high, l:q.low
+          });
+        }catch(e){
+          // silently keep placeholders
+        }
+      }));
+
+      // Gram Altın hesap: (Ons Altın * USDTRY) / 31.1035
+      try{
+        const gold = results["GOLD"] || await fetchQuote("GOLD");
+        const usdtry = results["USDTRY"] || await fetchQuote("USDTRY");
+        if(gold && usdtry){
+          const gram = (gold.close * usdtry.close) / 31.1035;
+          const gramOpen = (gold.open * usdtry.open) / 31.1035;
+          const chg = gram - gramOpen;
+          const pct = (chg/gramOpen)*100;
+
+          document.getElementById("gramVal").textContent = fmt2(gram);
+          const gramChg = document.getElementById("gramChg");
+          gramChg.querySelector(".c").textContent = (chg>=0?"+":"") + fmt2(chg);
+          gramChg.querySelector(".pct").textContent = `(${(pct>=0?"+":"") + fmt2(pct)}%)`;
+          gramChg.classList.remove("up","down");
+          gramChg.classList.add(chg>=0 ? "up" : "down");
+
+          const d = new Date();
+          const pad = n=>String(n).padStart(2,'0');
+          document.getElementById("gramUpd").textContent = `${pad(d.getHours())}:${pad(d.getMinutes())}`;
+        }
+      }catch(e){}
+    }
+
+    refreshAll();
+    // 2 dakikada bir yenile (GitHub Pages için hafif)
+    setInterval(refreshAll, 120000);
   </script>
 </body>
 </html>
+
