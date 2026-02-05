@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Canlı Finans — sade, hızlı, güncel</title>
   <meta name="description" content="Döviz, altın, emtia, BIST ve ABD endeksleri — sade, hızlı, güncel." />
+  <meta name="theme-color" content="#f6f8fb" />
 
   <style>
     :root{
@@ -16,6 +17,9 @@
       --shadow: 0 10px 30px rgba(15,23,42,.08);
       --radius:18px;
       --brand:#0ea5e9;
+      --warn-bg:#fff7ed;
+      --warn-text:#9a3412;
+      --warn-line:#fed7aa;
     }
     *{box-sizing:border-box}
     body{
@@ -46,6 +50,7 @@
       background: linear-gradient(135deg, rgba(14,165,233,.95), rgba(99,102,241,.95));
       box-shadow: 0 10px 22px rgba(14,165,233,.25);
       position:relative;
+      flex:0 0 auto;
     }
     .logo:after{
       content:"";
@@ -75,12 +80,27 @@
       background: rgba(14,165,233,.10);
     }
     .meta{
-      text-align:right; min-width:190px;
+      text-align:right; min-width:210px;
       font-size:12px; color:var(--muted);
     }
     .meta strong{color:var(--text); font-weight:600}
+
+    .hero{
+      margin-top:14px;
+      padding:14px 18px;
+      background: rgba(255,255,255,.62);
+      border: 1px solid rgba(226,232,240,.85);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.4;
+    }
+    .hero b{color:var(--text)}
+    .hero small{display:block;margin-top:6px;color:var(--muted)}
+
     .grid{
-      margin-top:18px;
+      margin-top:14px;
       display:grid;
       grid-template-columns: 1fr;
       gap:14px;
@@ -120,6 +140,7 @@
       box-shadow: 0 10px 22px rgba(15,23,42,.06);
       overflow:hidden;
       min-height: 240px;
+      position:relative;
     }
     .card.small{min-height:170px}
     .card.full{grid-column: 1 / -1}
@@ -135,10 +156,39 @@
       border:1px solid var(--line);
       padding:4px 8px; border-radius:999px;
       background:#fff;
+      white-space:nowrap;
     }
     .widget{
       padding:0 8px 10px;
     }
+
+    /* Placeholder / uyarı */
+    .tv-slot{
+      min-height:150px;
+      border-radius:12px;
+      border:1px dashed rgba(226,232,240,.9);
+      background: linear-gradient(180deg, rgba(248,250,252,.75), rgba(255,255,255,.55));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      color:var(--muted);
+      font-size:12px;
+      padding:10px;
+      position:relative;
+    }
+    .tv-warn{
+      margin:8px 12px 12px;
+      background:var(--warn-bg);
+      color:var(--warn-text);
+      border:1px solid var(--warn-line);
+      border-radius:12px;
+      padding:10px 12px;
+      font-size:12px;
+      display:none;
+    }
+    .tv-warn.show{display:block}
+
     .note{
       padding:10px 18px 16px;
       font-size:12px;
@@ -146,6 +196,7 @@
       border-top:1px dashed rgba(226,232,240,.9);
       background: rgba(248,250,252,.55);
     }
+
     .news{
       display:grid;
       grid-template-columns: 1fr;
@@ -165,14 +216,16 @@
     .news-item .top b{font-size:13px}
     .news-item .top span{font-size:12px;color:var(--muted)}
     .news-item p{margin:0;font-size:13px;color:#1f2937;line-height:1.4}
+
     footer{
       margin-top:14px;
       text-align:center;
       color:var(--muted);
       font-size:12px;
     }
+    footer a{color:#0b4a6f;text-decoration:none;border-bottom:1px dotted rgba(14,165,233,.5)}
+    footer a:hover{border-bottom-style:solid}
 
-    /* responsive */
     @media (max-width: 900px){
       .meta{display:none}
       .brand{min-width:unset}
@@ -207,6 +260,11 @@
       </div>
     </div>
 
+    <div class="hero">
+      <b>Tek sayfada</b> döviz, altın, emtia, borsa ve kriptoya hızlı bakış.
+      <small>Veriler görünmüyorsa: AdBlock/uBlock kapatıp <b>Ctrl+F5</b> yap. TradingView script’leri engellenmiş olabilir.</small>
+    </div>
+
     <div class="grid" id="sections">
 
       <!-- DÖVİZ -->
@@ -214,133 +272,54 @@
         <div class="section-head">
           <div>
             <h2 class="section-title">Döviz (TL bazında)</h2>
-            <p class="section-sub">USD/TRY, EUR/TRY ve sepet — hızlı kartlar.</p>
+            <p class="section-sub">USD/TRY, EUR/TRY, GBP/TRY ve DXY.</p>
           </div>
           <span class="tag">Kaynak: TradingView</span>
         </div>
 
         <div class="section-body">
           <div class="cards">
+
             <div class="card small">
-              <div class="pad">
-                <h3>Dolar / TL</h3><span class="tag">USDTRY</span>
-              </div>
+              <div class="pad"><h3>Dolar / TL</h3><span class="tag">USDTRY</span></div>
+              <div class="tv-warn" data-warn>Widget yüklenmedi. AdBlock/uBlock kapatıp Ctrl+F5 dener misin?</div>
               <div class="widget">
-                <!-- TV Symbol Overview -->
-                <div class="tradingview-widget-container">
-                  <div class="tradingview-widget-container__widget"></div>
-                  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
-                  {
-                    "symbols": [["FX:USDTRY|1D"]],
-                    "chartOnly": false,
-                    "width": "100%",
-                    "height": 150,
-                    "locale": "tr",
-                    "colorTheme": "light",
-                    "autosize": true,
-                    "showVolume": false,
-                    "showMA": false,
-                    "hideDateRanges": true,
-                    "hideMarketStatus": true,
-                    "hideSymbolLogo": false,
-                    "scalePosition": "right",
-                    "scaleMode": "Normal",
-                    "fontFamily": "system-ui",
-                    "fontSize": "12",
-                    "noTimeScale": true,
-                    "valuesTracking": "1",
-                    "changeMode": "price-and-percent",
-                    "lineWidth": 2,
-                    "dateRanges": ["1D|1","5D|1","1M|30"]
-                  }
-                  </script>
+                <div class="tv-slot tv" data-src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js"
+                  data-config='{"symbols":[["FX:USDTRY|1D"]],"chartOnly":false,"width":"100%","height":150,"locale":"tr","colorTheme":"light","autosize":true,"showVolume":false,"showMA":false,"hideDateRanges":true,"hideMarketStatus":true,"hideSymbolLogo":false,"scalePosition":"right","scaleMode":"Normal","fontFamily":"system-ui","fontSize":"12","noTimeScale":true,"valuesTracking":"1","changeMode":"price-and-percent","lineWidth":2}'>
+                  Yükleniyor…
                 </div>
               </div>
             </div>
 
             <div class="card small">
-              <div class="pad">
-                <h3>Euro / TL</h3><span class="tag">EURTRY</span>
-              </div>
+              <div class="pad"><h3>Euro / TL</h3><span class="tag">EURTRY</span></div>
+              <div class="tv-warn" data-warn>Widget yüklenmedi. AdBlock/uBlock kapatıp Ctrl+F5 dener misin?</div>
               <div class="widget">
-                <div class="tradingview-widget-container">
-                  <div class="tradingview-widget-container__widget"></div>
-                  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
-                  {
-                    "symbols": [["FX:EURTRY|1D"]],
-                    "chartOnly": false,
-                    "width": "100%",
-                    "height": 150,
-                    "locale": "tr",
-                    "colorTheme": "light",
-                    "autosize": true,
-                    "showVolume": false,
-                    "hideDateRanges": true,
-                    "hideMarketStatus": true,
-                    "noTimeScale": true,
-                    "valuesTracking": "1",
-                    "changeMode": "price-and-percent",
-                    "lineWidth": 2
-                  }
-                  </script>
+                <div class="tv-slot tv" data-src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js"
+                  data-config='{"symbols":[["FX:EURTRY|1D"]],"chartOnly":false,"width":"100%","height":150,"locale":"tr","colorTheme":"light","autosize":true,"showVolume":false,"hideDateRanges":true,"hideMarketStatus":true,"noTimeScale":true,"valuesTracking":"1","changeMode":"price-and-percent","lineWidth":2}'>
+                  Yükleniyor…
                 </div>
               </div>
             </div>
 
             <div class="card small">
-              <div class="pad">
-                <h3>Sterlin / TL</h3><span class="tag">GBPTRY</span>
-              </div>
+              <div class="pad"><h3>Sterlin / TL</h3><span class="tag">GBPTRY</span></div>
+              <div class="tv-warn" data-warn>Widget yüklenmedi. AdBlock/uBlock kapatıp Ctrl+F5 dener misin?</div>
               <div class="widget">
-                <div class="tradingview-widget-container">
-                  <div class="tradingview-widget-container__widget"></div>
-                  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
-                  {
-                    "symbols": [["FX:GBPTRY|1D"]],
-                    "chartOnly": false,
-                    "width": "100%",
-                    "height": 150,
-                    "locale": "tr",
-                    "colorTheme": "light",
-                    "autosize": true,
-                    "showVolume": false,
-                    "hideDateRanges": true,
-                    "hideMarketStatus": true,
-                    "noTimeScale": true,
-                    "valuesTracking": "1",
-                    "changeMode": "price-and-percent",
-                    "lineWidth": 2
-                  }
-                  </script>
+                <div class="tv-slot tv" data-src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js"
+                  data-config='{"symbols":[["FX:GBPTRY|1D"]],"chartOnly":false,"width":"100%","height":150,"locale":"tr","colorTheme":"light","autosize":true,"showVolume":false,"hideDateRanges":true,"hideMarketStatus":true,"noTimeScale":true,"valuesTracking":"1","changeMode":"price-and-percent","lineWidth":2}'>
+                  Yükleniyor…
                 </div>
               </div>
             </div>
 
             <div class="card small">
-              <div class="pad">
-                <h3>DXY (Dolar Endeksi)</h3><span class="tag">DXY</span>
-              </div>
+              <div class="pad"><h3>DXY (Dolar Endeksi)</h3><span class="tag">DXY</span></div>
+              <div class="tv-warn" data-warn>Widget yüklenmedi. AdBlock/uBlock kapatıp Ctrl+F5 dener misin?</div>
               <div class="widget">
-                <div class="tradingview-widget-container">
-                  <div class="tradingview-widget-container__widget"></div>
-                  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
-                  {
-                    "symbols": [["TVC:DXY|1D"]],
-                    "chartOnly": false,
-                    "width": "100%",
-                    "height": 150,
-                    "locale": "tr",
-                    "colorTheme": "light",
-                    "autosize": true,
-                    "showVolume": false,
-                    "hideDateRanges": true,
-                    "hideMarketStatus": true,
-                    "noTimeScale": true,
-                    "valuesTracking": "1",
-                    "changeMode": "price-and-percent",
-                    "lineWidth": 2
-                  }
-                  </script>
+                <div class="tv-slot tv" data-src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js"
+                  data-config='{"symbols":[["TVC:DXY|1D"]],"chartOnly":false,"width":"100%","height":150,"locale":"tr","colorTheme":"light","autosize":true,"showVolume":false,"hideDateRanges":true,"hideMarketStatus":true,"noTimeScale":true,"valuesTracking":"1","changeMode":"price-and-percent","lineWidth":2}'>
+                  Yükleniyor…
                 </div>
               </div>
             </div>
@@ -348,7 +327,7 @@
           </div>
         </div>
 
-        <div class="note">Not: Bu sayfa “widget toplama” mantığında. API/CORS ile uğraşmadan en stabil gömme yöntemi bu.</div>
+        <div class="note">Bu sayfa widget toplama mantığında. Trafik/Adsense için ayrıca “Günün Notları” bölümünü düzenli doldurmak çok önemli.</div>
       </section>
 
       <!-- ALTIN / GÜMÜŞ / EMTİA -->
@@ -356,252 +335,117 @@
         <div class="section-head">
           <div>
             <h2 class="section-title">Altın / Gümüş / Emtia</h2>
-            <p class="section-sub">Gram altın için XAU/TRY, ons altın ve gümüş.</p>
+            <p class="section-sub">Gram altın, ons altın, gümüş ve Brent.</p>
           </div>
           <span class="tag">Kaynak: TradingView</span>
         </div>
 
         <div class="section-body">
           <div class="cards">
+
             <div class="card">
-              <div class="pad">
-                <h3>Gram Altın (XAU/TRY)</h3><span class="tag">XAUTRY</span>
-              </div>
+              <div class="pad"><h3>Gram Altın (XAU/TRY)</h3><span class="tag">XAUTRY</span></div>
+              <div class="tv-warn" data-warn>Widget yüklenmedi. AdBlock/uBlock kapatıp Ctrl+F5 dener misin?</div>
               <div class="widget">
-                <div class="tradingview-widget-container">
-                  <div class="tradingview-widget-container__widget"></div>
-                  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
-                  {
-                    "symbols": [["OANDA:XAUTRY|1D"]],
-                    "chartOnly": false,
-                    "width": "100%",
-                    "height": 210,
-                    "locale": "tr",
-                    "colorTheme": "light",
-                    "autosize": true,
-                    "showVolume": false,
-                    "hideDateRanges": false,
-                    "hideMarketStatus": true,
-                    "noTimeScale": false,
-                    "valuesTracking": "1",
-                    "changeMode": "price-and-percent",
-                    "lineWidth": 2
-                  }
-                  </script>
+                <div class="tv-slot tv" data-src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js"
+                  data-config='{"symbols":[["OANDA:XAUTRY|1D"]],"chartOnly":false,"width":"100%","height":210,"locale":"tr","colorTheme":"light","autosize":true,"showVolume":false,"hideDateRanges":false,"hideMarketStatus":true,"noTimeScale":false,"valuesTracking":"1","changeMode":"price-and-percent","lineWidth":2}'>
+                  Yükleniyor…
                 </div>
               </div>
             </div>
 
             <div class="card">
-              <div class="pad">
-                <h3>Ons Altın (XAU/USD)</h3><span class="tag">XAUUSD</span>
-              </div>
+              <div class="pad"><h3>Ons Altın (XAU/USD)</h3><span class="tag">XAUUSD</span></div>
+              <div class="tv-warn" data-warn>Widget yüklenmedi. AdBlock/uBlock kapatıp Ctrl+F5 dener misin?</div>
               <div class="widget">
-                <div class="tradingview-widget-container">
-                  <div class="tradingview-widget-container__widget"></div>
-                  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
-                  {
-                    "symbols": [["OANDA:XAUUSD|1D"]],
-                    "chartOnly": false,
-                    "width": "100%",
-                    "height": 210,
-                    "locale": "tr",
-                    "colorTheme": "light",
-                    "autosize": true,
-                    "showVolume": false,
-                    "hideMarketStatus": true,
-                    "valuesTracking": "1",
-                    "changeMode": "price-and-percent",
-                    "lineWidth": 2
-                  }
-                  </script>
+                <div class="tv-slot tv" data-src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js"
+                  data-config='{"symbols":[["OANDA:XAUUSD|1D"]],"chartOnly":false,"width":"100%","height":210,"locale":"tr","colorTheme":"light","autosize":true,"showVolume":false,"hideMarketStatus":true,"valuesTracking":"1","changeMode":"price-and-percent","lineWidth":2}'>
+                  Yükleniyor…
                 </div>
               </div>
             </div>
 
             <div class="card">
-              <div class="pad">
-                <h3>Gümüş (XAG/USD)</h3><span class="tag">XAGUSD</span>
-              </div>
+              <div class="pad"><h3>Gümüş (XAG/USD)</h3><span class="tag">XAGUSD</span></div>
+              <div class="tv-warn" data-warn>Widget yüklenmedi. AdBlock/uBlock kapatıp Ctrl+F5 dener misin?</div>
               <div class="widget">
-                <div class="tradingview-widget-container">
-                  <div class="tradingview-widget-container__widget"></div>
-                  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
-                  {
-                    "symbols": [["OANDA:XAGUSD|1D"]],
-                    "chartOnly": false,
-                    "width": "100%",
-                    "height": 210,
-                    "locale": "tr",
-                    "colorTheme": "light",
-                    "autosize": true,
-                    "showVolume": false,
-                    "hideMarketStatus": true,
-                    "valuesTracking": "1",
-                    "changeMode": "price-and-percent",
-                    "lineWidth": 2
-                  }
-                  </script>
+                <div class="tv-slot tv" data-src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js"
+                  data-config='{"symbols":[["OANDA:XAGUSD|1D"]],"chartOnly":false,"width":"100%","height":210,"locale":"tr","colorTheme":"light","autosize":true,"showVolume":false,"hideMarketStatus":true,"valuesTracking":"1","changeMode":"price-and-percent","lineWidth":2}'>
+                  Yükleniyor…
                 </div>
               </div>
             </div>
 
             <div class="card">
-              <div class="pad">
-                <h3>Brent Petrol</h3><span class="tag">UKOIL</span>
-              </div>
+              <div class="pad"><h3>Brent Petrol</h3><span class="tag">UKOIL</span></div>
+              <div class="tv-warn" data-warn>Widget yüklenmedi. AdBlock/uBlock kapatıp Ctrl+F5 dener misin?</div>
               <div class="widget">
-                <div class="tradingview-widget-container">
-                  <div class="tradingview-widget-container__widget"></div>
-                  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
-                  {
-                    "symbols": [["TVC:UKOIL|1D"]],
-                    "chartOnly": false,
-                    "width": "100%",
-                    "height": 210,
-                    "locale": "tr",
-                    "colorTheme": "light",
-                    "autosize": true,
-                    "showVolume": false,
-                    "hideMarketStatus": true,
-                    "valuesTracking": "1",
-                    "changeMode": "price-and-percent",
-                    "lineWidth": 2
-                  }
-                  </script>
+                <div class="tv-slot tv" data-src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js"
+                  data-config='{"symbols":[["TVC:UKOIL|1D"]],"chartOnly":false,"width":"100%","height":210,"locale":"tr","colorTheme":"light","autosize":true,"showVolume":false,"hideMarketStatus":true,"valuesTracking":"1","changeMode":"price-and-percent","lineWidth":2}'>
+                  Yükleniyor…
                 </div>
               </div>
             </div>
+
           </div>
         </div>
 
-        <div class="note">“Çeyrek/Tam/22 ayar” gibi perakende altın türleri için en temiz yöntem: bir sonraki adımda haber paneli gibi basit bir “fiyat girişi” alanı açmak (admin’den girersin).</div>
+        <div class="note">Çeyrek/tam/22 ayar gibi içerikleri “Günün Notları”na kısa fiyat özeti olarak girebilirsin (Adsense için özgün içerik olur).</div>
       </section>
 
-      <!-- BORSA (BIST + ABD) -->
+      <!-- BORSA -->
       <section class="section" data-section="borsa">
         <div class="section-head">
           <div>
             <h2 class="section-title">Borsa (BIST + ABD)</h2>
-            <p class="section-sub">Grafik şart değil dedin — kart görünümüyle yeterli.</p>
+            <p class="section-sub">Endeks kartları + popüler ABD hisseleri listesi.</p>
           </div>
           <span class="tag">Kaynak: TradingView</span>
         </div>
 
         <div class="section-body">
           <div class="cards">
+
             <div class="card">
-              <div class="pad">
-                <h3>BIST 100</h3><span class="tag">XU100</span>
-              </div>
+              <div class="pad"><h3>BIST 100</h3><span class="tag">XU100</span></div>
+              <div class="tv-warn" data-warn>Widget yüklenmedi. AdBlock/uBlock kapatıp Ctrl+F5 dener misin?</div>
               <div class="widget">
-                <div class="tradingview-widget-container">
-                  <div class="tradingview-widget-container__widget"></div>
-                  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
-                  {
-                    "symbols": [["BIST:XU100|1D"]],
-                    "chartOnly": false,
-                    "width": "100%",
-                    "height": 230,
-                    "locale": "tr",
-                    "colorTheme": "light",
-                    "autosize": true,
-                    "showVolume": false,
-                    "hideMarketStatus": true,
-                    "valuesTracking": "1",
-                    "changeMode": "price-and-percent",
-                    "lineWidth": 2
-                  }
-                  </script>
+                <div class="tv-slot tv" data-src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js"
+                  data-config='{"symbols":[["BIST:XU100|1D"]],"chartOnly":false,"width":"100%","height":230,"locale":"tr","colorTheme":"light","autosize":true,"showVolume":false,"hideMarketStatus":true,"valuesTracking":"1","changeMode":"price-and-percent","lineWidth":2}'>
+                  Yükleniyor…
                 </div>
               </div>
             </div>
 
             <div class="card">
-              <div class="pad">
-                <h3>S&P 500</h3><span class="tag">SPX</span>
-              </div>
+              <div class="pad"><h3>S&P 500</h3><span class="tag">SPX</span></div>
+              <div class="tv-warn" data-warn>Widget yüklenmedi. AdBlock/uBlock kapatıp Ctrl+F5 dener misin?</div>
               <div class="widget">
-                <div class="tradingview-widget-container">
-                  <div class="tradingview-widget-container__widget"></div>
-                  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
-                  {
-                    "symbols": [["TVC:SPX|1D"]],
-                    "chartOnly": false,
-                    "width": "100%",
-                    "height": 230,
-                    "locale": "tr",
-                    "colorTheme": "light",
-                    "autosize": true,
-                    "showVolume": false,
-                    "hideMarketStatus": true,
-                    "valuesTracking": "1",
-                    "changeMode": "price-and-percent",
-                    "lineWidth": 2
-                  }
-                  </script>
+                <div class="tv-slot tv" data-src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js"
+                  data-config='{"symbols":[["TVC:SPX|1D"]],"chartOnly":false,"width":"100%","height":230,"locale":"tr","colorTheme":"light","autosize":true,"showVolume":false,"hideMarketStatus":true,"valuesTracking":"1","changeMode":"price-and-percent","lineWidth":2}'>
+                  Yükleniyor…
                 </div>
               </div>
             </div>
 
             <div class="card">
-              <div class="pad">
-                <h3>NASDAQ 100</h3><span class="tag">NDX</span>
-              </div>
+              <div class="pad"><h3>NASDAQ 100</h3><span class="tag">NDX</span></div>
+              <div class="tv-warn" data-warn>Widget yüklenmedi. AdBlock/uBlock kapatıp Ctrl+F5 dener misin?</div>
               <div class="widget">
-                <div class="tradingview-widget-container">
-                  <div class="tradingview-widget-container__widget"></div>
-                  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
-                  {
-                    "symbols": [["TVC:NDX|1D"]],
-                    "chartOnly": false,
-                    "width": "100%",
-                    "height": 230,
-                    "locale": "tr",
-                    "colorTheme": "light",
-                    "autosize": true,
-                    "showVolume": false,
-                    "hideMarketStatus": true,
-                    "valuesTracking": "1",
-                    "changeMode": "price-and-percent",
-                    "lineWidth": 2
-                  }
-                  </script>
+                <div class="tv-slot tv" data-src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js"
+                  data-config='{"symbols":[["TVC:NDX|1D"]],"chartOnly":false,"width":"100%","height":230,"locale":"tr","colorTheme":"light","autosize":true,"showVolume":false,"hideMarketStatus":true,"valuesTracking":"1","changeMode":"price-and-percent","lineWidth":2}'>
+                  Yükleniyor…
                 </div>
               </div>
             </div>
 
             <div class="card">
-              <div class="pad">
-                <h3>En çok izlenen ABD hisseleri</h3><span class="tag">AAPL • NVDA • TSLA</span>
-              </div>
+              <div class="pad"><h3>ABD - Popüler Hisseler</h3><span class="tag">AAPL • NVDA • TSLA</span></div>
+              <div class="tv-warn" data-warn>Widget yüklenmedi. AdBlock/uBlock kapatıp Ctrl+F5 dener misin?</div>
               <div class="widget">
-                <!-- Watchlist (çok şık duruyor, sayfayı uzatmıyor) -->
-                <div class="tradingview-widget-container">
-                  <div class="tradingview-widget-container__widget"></div>
-                  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-quotes.js" async>
-                  {
-                    "width": "100%",
-                    "height": 230,
-                    "symbolsGroups": [
-                      {
-                        "name": "ABD - Popüler",
-                        "originalName": "US",
-                        "symbols": [
-                          {"name":"NASDAQ:AAPL","displayName":"Apple"},
-                          {"name":"NASDAQ:NVDA","displayName":"NVIDIA"},
-                          {"name":"NASDAQ:TSLA","displayName":"Tesla"},
-                          {"name":"NYSE:MSFT","displayName":"Microsoft"},
-                          {"name":"NASDAQ:AMZN","displayName":"Amazon"}
-                        ]
-                      }
-                    ],
-                    "showSymbolLogo": true,
-                    "colorTheme": "light",
-                    "isTransparent": true,
-                    "locale": "tr"
-                  }
-                  </script>
+                <div class="tv-slot tv" data-src="https://s3.tradingview.com/external-embedding/embed-widget-market-quotes.js"
+                  data-config='{"width":"100%","height":230,"symbolsGroups":[{"name":"ABD - Popüler","originalName":"US","symbols":[{"name":"NASDAQ:AAPL","displayName":"Apple"},{"name":"NASDAQ:NVDA","displayName":"NVIDIA"},{"name":"NASDAQ:TSLA","displayName":"Tesla"},{"name":"NYSE:MSFT","displayName":"Microsoft"},{"name":"NASDAQ:AMZN","displayName":"Amazon"}]}],"showSymbolLogo":true,"colorTheme":"light","isTransparent":true,"locale":"tr"}'>
+                  Yükleniyor…
                 </div>
               </div>
             </div>
@@ -609,7 +453,7 @@
           </div>
         </div>
 
-        <div class="note">Eğer bazı semboller “boş” kalırsa: TradingView bazen bölge/erişim kısıtı yapabiliyor. O durumda sadece sembol adını değiştiriyoruz (tek satır).</div>
+        <div class="note">Eğer bazı endeksler boş kalırsa: sembol adını alternatifle değiştiririz (tek satır).</div>
       </section>
 
       <!-- KRİPTO -->
@@ -617,114 +461,54 @@
         <div class="section-head">
           <div>
             <h2 class="section-title">Kripto</h2>
-            <p class="section-sub">BTC, ETH, SOL hızlı görünüm.</p>
+            <p class="section-sub">BTC, ETH, SOL + öne çıkan liste.</p>
           </div>
           <span class="tag">Kaynak: TradingView</span>
         </div>
 
         <div class="section-body">
           <div class="cards">
+
             <div class="card">
-              <div class="pad">
-                <h3>Bitcoin</h3><span class="tag">BTCUSDT</span>
-              </div>
+              <div class="pad"><h3>Bitcoin</h3><span class="tag">BTCUSDT</span></div>
+              <div class="tv-warn" data-warn>Widget yüklenmedi. AdBlock/uBlock kapatıp Ctrl+F5 dener misin?</div>
               <div class="widget">
-                <div class="tradingview-widget-container">
-                  <div class="tradingview-widget-container__widget"></div>
-                  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
-                  {
-                    "symbols": [["BINANCE:BTCUSDT|1D"]],
-                    "chartOnly": false,
-                    "width": "100%",
-                    "height": 230,
-                    "locale": "tr",
-                    "colorTheme": "light",
-                    "autosize": true,
-                    "showVolume": false,
-                    "hideMarketStatus": true,
-                    "valuesTracking": "1",
-                    "changeMode": "price-and-percent",
-                    "lineWidth": 2
-                  }
-                  </script>
+                <div class="tv-slot tv" data-src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js"
+                  data-config='{"symbols":[["BINANCE:BTCUSDT|1D"]],"chartOnly":false,"width":"100%","height":230,"locale":"tr","colorTheme":"light","autosize":true,"showVolume":false,"hideMarketStatus":true,"valuesTracking":"1","changeMode":"price-and-percent","lineWidth":2}'>
+                  Yükleniyor…
                 </div>
               </div>
             </div>
 
             <div class="card">
-              <div class="pad">
-                <h3>Ethereum</h3><span class="tag">ETHUSDT</span>
-              </div>
+              <div class="pad"><h3>Ethereum</h3><span class="tag">ETHUSDT</span></div>
+              <div class="tv-warn" data-warn>Widget yüklenmedi. AdBlock/uBlock kapatıp Ctrl+F5 dener misin?</div>
               <div class="widget">
-                <div class="tradingview-widget-container">
-                  <div class="tradingview-widget-container__widget"></div>
-                  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
-                  {
-                    "symbols": [["BINANCE:ETHUSDT|1D"]],
-                    "chartOnly": false,
-                    "width": "100%",
-                    "height": 230,
-                    "locale": "tr",
-                    "colorTheme": "light",
-                    "autosize": true,
-                    "showVolume": false,
-                    "hideMarketStatus": true,
-                    "valuesTracking": "1",
-                    "changeMode": "price-and-percent",
-                    "lineWidth": 2
-                  }
-                  </script>
+                <div class="tv-slot tv" data-src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js"
+                  data-config='{"symbols":[["BINANCE:ETHUSDT|1D"]],"chartOnly":false,"width":"100%","height":230,"locale":"tr","colorTheme":"light","autosize":true,"showVolume":false,"hideMarketStatus":true,"valuesTracking":"1","changeMode":"price-and-percent","lineWidth":2}'>
+                  Yükleniyor…
                 </div>
               </div>
             </div>
 
             <div class="card">
-              <div class="pad">
-                <h3>Solana</h3><span class="tag">SOLUSDT</span>
-              </div>
+              <div class="pad"><h3>Solana</h3><span class="tag">SOLUSDT</span></div>
+              <div class="tv-warn" data-warn>Widget yüklenmedi. AdBlock/uBlock kapatıp Ctrl+F5 dener misin?</div>
               <div class="widget">
-                <div class="tradingview-widget-container">
-                  <div class="tradingview-widget-container__widget"></div>
-                  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
-                  {
-                    "symbols": [["BINANCE:SOLUSDT|1D"]],
-                    "chartOnly": false,
-                    "width": "100%",
-                    "height": 230,
-                    "locale": "tr",
-                    "colorTheme": "light",
-                    "autosize": true,
-                    "showVolume": false,
-                    "hideMarketStatus": true,
-                    "valuesTracking": "1",
-                    "changeMode": "price-and-percent",
-                    "lineWidth": 2
-                  }
-                  </script>
+                <div class="tv-slot tv" data-src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js"
+                  data-config='{"symbols":[["BINANCE:SOLUSDT|1D"]],"chartOnly":false,"width":"100%","height":230,"locale":"tr","colorTheme":"light","autosize":true,"showVolume":false,"hideMarketStatus":true,"valuesTracking":"1","changeMode":"price-and-percent","lineWidth":2}'>
+                  Yükleniyor…
                 </div>
               </div>
             </div>
 
             <div class="card">
-              <div class="pad">
-                <h3>Öne çıkanlar (liste)</h3><span class="tag">Top Coins</span>
-              </div>
+              <div class="pad"><h3>Öne çıkanlar (liste)</h3><span class="tag">Top Coins</span></div>
+              <div class="tv-warn" data-warn>Widget yüklenmedi. AdBlock/uBlock kapatıp Ctrl+F5 dener misin?</div>
               <div class="widget">
-                <div class="tradingview-widget-container">
-                  <div class="tradingview-widget-container__widget"></div>
-                  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-screener.js" async>
-                  {
-                    "width": "100%",
-                    "height": 230,
-                    "defaultColumn": "overview",
-                    "defaultScreen": "general",
-                    "market": "crypto",
-                    "showToolbar": false,
-                    "colorTheme": "light",
-                    "locale": "tr",
-                    "isTransparent": true
-                  }
-                  </script>
+                <div class="tv-slot tv" data-src="https://s3.tradingview.com/external-embedding/embed-widget-screener.js"
+                  data-config='{"width":"100%","height":230,"defaultColumn":"overview","defaultScreen":"general","market":"crypto","showToolbar":false,"colorTheme":"light","locale":"tr","isTransparent":true}'>
+                  Yükleniyor…
                 </div>
               </div>
             </div>
@@ -732,7 +516,7 @@
           </div>
         </div>
 
-        <div class="note">Kriptoda istersen “TR bazlı” da yaparız (ör. BTC/TRY) ama borsa seçimine göre değişiyor.</div>
+        <div class="note">Kriptoda istersen BTC/TRY gibi TL pariteleri de ekleriz.</div>
       </section>
 
       <!-- HABER / NOTLAR -->
@@ -755,7 +539,10 @@
     </div>
 
     <footer>
-      © <span id="year"></span> Canlı Finans • Minimal demo • Kaynaklar: TradingView widget'ları
+      © <span id="year"></span> Canlı Finans •
+      <a href="./privacy.html" target="_blank" rel="noopener">Gizlilik</a> •
+      <a href="./terms.html" target="_blank" rel="noopener">Kullanım</a> •
+      <span>Kaynak: TradingView widget’ları</span>
     </footer>
   </div>
 
@@ -771,7 +558,51 @@
     }
     tick(); setInterval(tick, 1000);
 
-    // Sekmeler: "Ana sayfa" = hepsini göster
+    // TradingView widget loader (daha stabil)
+    function loadTradingViewForVisible(){
+      const visibleSections = Array.from(document.querySelectorAll('[data-section]'))
+        .filter(sec => sec.style.display !== 'none');
+
+      const slots = visibleSections.flatMap(sec => Array.from(sec.querySelectorAll('.tv')));
+
+      slots.forEach(slot => {
+        if (slot.dataset.loaded === "1") return;
+
+        const src = slot.dataset.src;
+        const cfg = slot.dataset.config;
+
+        // TradingView widget beklediği container class'ları
+        const container = document.createElement('div');
+        container.className = 'tradingview-widget-container';
+        const inner = document.createElement('div');
+        inner.className = 'tradingview-widget-container__widget';
+        container.appendChild(inner);
+
+        // slot içini temizle ve container'ı koy
+        slot.textContent = '';
+        slot.appendChild(container);
+
+        // Script'i düzgün şekilde enjekte et
+        const script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.src = src;
+        script.async = true;
+        script.text = cfg; // kritik: config JSON buraya
+        container.appendChild(script);
+
+        slot.dataset.loaded = "1";
+
+        // 4sn sonra hala boşsa uyarı göster (AdBlock vb.)
+        setTimeout(() => {
+          const warn = slot.closest('.card')?.querySelector('[data-warn]');
+          const hasIFrameOrContent = container.querySelector('iframe, canvas, svg') || container.textContent.trim().length > 0;
+          // TV bazen iframe basar; bazen DOM'a içerik yazar. Hiçbir şey yoksa uyar.
+          if (!hasIFrameOrContent && warn) warn.classList.add('show');
+        }, 4000);
+      });
+    }
+
+    // Sekmeler
     const tabs = document.querySelectorAll(".tab");
     const sections = document.querySelectorAll("[data-section]");
     tabs.forEach(t=>{
@@ -782,6 +613,8 @@
         sections.forEach(s=>{
           s.style.display = (target==="all" || s.dataset.section===target) ? "" : "none";
         });
+        // sadece görünenlerin widget'larını yükle
+        loadTradingViewForVisible();
         window.scrollTo({top:0, behavior:"smooth"});
       });
     });
@@ -793,7 +626,7 @@
         const res = await fetch("./news.json", {cache:"no-store"});
         const data = await res.json();
         if(!Array.isArray(data) || data.length===0){
-          box.innerHTML = `<div class="news-item"><b>Henüz not yok</b><p>Admin panelden ekleyebilirsin.</p></div>`;
+          box.innerHTML = `<div class="news-item"><div class="top"><b>Henüz not yok</b><span>—</span></div><p>Admin panelden 2–3 kısa not ekle. Adsense için özgün içerik çok işe yarar.</p></div>`;
           return;
         }
         box.innerHTML = data.slice(0,12).map(item => `
@@ -806,13 +639,17 @@
           </div>
         `).join("");
       }catch(e){
-        box.innerHTML = `<div class="news-item"><b>Haberler yüklenemedi</b><p>news.json bulunamadı veya hatalı format.</p></div>`;
+        box.innerHTML = `<div class="news-item"><div class="top"><b>Haberler yüklenemedi</b><span>—</span></div><p>news.json bulunamadı veya hatalı format.</p></div>`;
       }
     }
     function escapeHtml(s){
       return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
     }
+
     loadNews();
+
+    // Sayfa açılır açılmaz görünen widget'ları yükle
+    loadTradingViewForVisible();
   </script>
 </body>
 </html>
