@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Canlı Finans • Admin</title>
+  <style>
+    body{font-family:system-ui;margin:0;background:#f6f8fb;color:#0f172a}
+    .wrap{max-width:900px;margin:30px auto;padding:0 16px}
+    .card{background:#fff;border:1px solid #e2e8f0;border-radius:16px;box-shadow:0 10px 22px rgba(15,23,42,.06);padding:14px}
+    h1{margin:0 0 8px;font-size:18px}
+    p{margin:0 0 14px;color:#64748b;font-size:13px}
+    label{display:block;font-size:12px;color:#475569;margin:10px 0 6px}
+    input,textarea{width:100%;padding:10px 12px;border:1px solid #e2e8f0;border-radius:12px;font-size:14px}
+    textarea{min-height:110px;resize:vertical}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    @media (max-width:700px){.row{grid-template-columns:1fr}}
+    button{cursor:pointer;border:0;background:#0ea5e9;color:#fff;padding:10px 12px;border-radius:12px;font-weight:600}
+    .btn2{background:#334155}
+    .list{margin-top:12px;display:grid;gap:10px}
+    .item{border:1px solid #e2e8f0;border-radius:14px;padding:10px 12px;background:#fff}
+    .item b{font-size:13px}
+    .item small{color:#64748b}
+    .item .actions{margin-top:8px;display:flex;gap:8px}
+    .item .actions button{padding:8px 10px;font-size:12px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <h1>Admin — Günün Notları</h1>
+      <p>Not ekle → “JSON indir” → repo’daki <code>news.json</code> dosyasını bununla değiştir.</p>
+
+      <div class="row">
+        <div>
+          <label>Tarih</label>
+          <input id="date" placeholder="05.02.2026" />
+        </div>
+        <div>
+          <label>Başlık</label>
+          <input id="title" placeholder="Örn: BIST’te işlem hacmi arttı" />
+        </div>
+      </div>
+
+      <label>Metin</label>
+      <textarea id="text" placeholder="2-3 cümle yaz..."></textarea>
+
+      <div style="display:flex;gap:10px;margin-top:12px;flex-wrap:wrap">
+        <button id="add">Ekle</button>
+        <button class="btn2" id="download">JSON indir</button>
+        <button class="btn2" id="clear">Temizle</button>
+        <a href="./index.html" style="margin-left:auto;color:#0ea5e9;text-decoration:none;align-self:center">Siteye dön</a>
+      </div>
+
+      <div class="list" id="list"></div>
+    </div>
+  </div>
+
+  <script>
+    const dateEl = document.getElementById("date");
+    const titleEl = document.getElementById("title");
+    const textEl = document.getElementById("text");
+    const listEl = document.getElementById("list");
+    let items = [];
+
+    function render(){
+      listEl.innerHTML = items.map((x,i)=>`
+        <div class="item">
+          <div><b>${esc(x.title)}</b> <small>• ${esc(x.date)}</small></div>
+          <div style="margin-top:6px;color:#334155">${esc(x.text)}</div>
+          <div class="actions">
+            <button onclick="del(${i})">Sil</button>
+            <button onclick="up(${i})">Yukarı</button>
+            <button onclick="down(${i})">Aşağı</button>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    window.del = (i)=>{ items.splice(i,1); render(); };
+    window.up = (i)=>{ if(i===0) return; [items[i-1],items[i]]=[items[i],items[i-1]]; render(); };
+    window.down = (i)=>{ if(i===items.length-1) return; [items[i+1],items[i]]=[items[i],items[i+1]]; render(); };
+
+    function esc(s){
+      return String(s||"").replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+    }
+
+    document.getElementById("add").addEventListener("click", async ()=>{
+      const d = dateEl.value.trim();
+      const t = titleEl.value.trim();
+      const tx = textEl.value.trim();
+      if(!d || !t || !tx) return alert("Tarih, başlık, metin boş olmasın.");
+      items.unshift({date:d, title:t, text:tx});
+      titleEl.value=""; textEl.value="";
+      render();
+    });
+
+    document.getElementById("download").addEventListener("click", ()=>{
+      const blob = new Blob([JSON.stringify(items, null, 2)], {type:"application/json"});
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = "news.json";
+      a.click();
+      URL.revokeObjectURL(a.href);
+    });
+
+    document.getElementById("clear").addEventListener("click", ()=>{
+      if(confirm("Hepsi silinsin mi?")){ items=[]; render(); }
+    });
+
+    // Mevcut news.json'ı çekmeye çalış
+    (async ()=>{
+      try{
+        const res = await fetch("./news.json", {cache:"no-store"});
+        const data = await res.json();
+        if(Array.isArray(data)) items = data;
+      }catch(e){}
+      // tarih default
+      const d = new Date(); const pad=n=>String(n).padStart(2,'0');
+      dateEl.value = `${pad(d.getDate())}.${pad(d.getMonth()+1)}.${d.getFullYear()}`;
+      render();
+    })();
+  </script>
+</body>
+</html>
